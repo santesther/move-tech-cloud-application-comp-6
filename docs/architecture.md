@@ -20,7 +20,7 @@ API de pedidos containerizada, rodando em um cluster K3s (nó único) numa VM na
 flowchart LR
     cliente["Cliente HTTP"]
     gh["GitHub Actions"]
-    
+
     subgraph mgc["Magalu Cloud"]
         subgraph vm["VM BV2-2-40 · K3s"]
             kube["K3s API Server :6443"]
@@ -36,7 +36,7 @@ flowchart LR
     app -->|SQL · TCP 5432| db
     gh -->|Docker Push · HTTPS 443| reg
     gh -->|kubectl apply · HTTPS 6443| kube
-    kube -->|cria/atualiza Deployments| app
+    kube -->|Aplica manifests| app
     reg -->|Pull Image · HTTPS 443| app
 ```
 
