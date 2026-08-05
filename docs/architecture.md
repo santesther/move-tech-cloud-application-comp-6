@@ -23,6 +23,7 @@ flowchart LR
     
     subgraph mgc["Magalu Cloud"]
         subgraph vm["VM BV2-2-40 · K3s"]
+            kube["K3s API Server :6443"]
             svc["Klipper ServiceLB :80"]
             app["cloud-application · 2 pods (FastAPI)"]
         end
@@ -34,7 +35,8 @@ flowchart LR
     svc -->|HTTP / JSON · TCP 8000| app
     app -->|SQL · TCP 5432| db
     gh -->|Docker Push · HTTPS 443| reg
-    gh -->|kubectl apply · HTTPS 6443| app
+    gh -->|kubectl apply · HTTPS 6443| kube
+    kube -->|cria/atualiza Deployments| app
     reg -->|Pull Image · HTTPS 443| app
 ```
 
